@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Obsidian Comopnents',
   tagline: 'Build your own obsidian',
-  // favicon: '',
+  favicon: './img/favicon-128.ico',
 
   // Set the production url of your site here
   url: 'https://obsidian-components.github.io',
@@ -23,7 +23,7 @@ const config: Config = {
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  // may want to replace "en" with "zh-Hans". 
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],

@@ -1,5 +1,6 @@
+// @ts-ignore
+import Masonry from "react-responsive-masonry";
 import {
-  BarChart3Icon,
   BarChartIcon,
   Clock,
   Command,
@@ -12,6 +13,7 @@ import {
   SquarePercent,
   Table,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function () {
   const size = 18;
@@ -85,44 +87,82 @@ export default function () {
       icon: <LayoutDashboard className="text-gray-500" size={size} />,
     },
   ];
+  const [columnCount, setColumnCount] = useState(3);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const columnCount = 3;
-  const componentsColumns = [];
-  for (let i = 0; i < components.length; i += columnCount) {
-    componentsColumns.push(components.slice(i, i + columnCount));
-  }
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const cr = entry.contentRect;
+        setContainerWidth(cr.width);
+      }
+    });
+    resizeObserver.observe(containerRef.current);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const width = containerWidth;
+    if (width == null) {
+      return;
+    }
+
+    if (width <= 300) {
+      setColumnCount(1);
+    } else if (width <= 576) {
+      setColumnCount(2);
+    } else if (width <= 992) {
+      setColumnCount(3);
+    } else {
+      setColumnCount(4);
+    }
+  }, [containerWidth]);
 
   return (
-    <div className="flex flex-col mt-4">
+    <div className="flex flex-col p-4 mt-4 w-full">
       <div className="text-4xl font-bold text-center">
         <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 inline-block text-transparent bg-clip-text">
-          10&nbsp;余种组件
+          10&nbsp;余种组件，
         </span>
-        ， 像玩乐高一样搭建你的系统
+        <div className="mt-4 text-2xl text-slate-600">
+          像玩乐高一样
+          <span className="bg-gradient-to-r from-red-600 via-red-500 to-red-400 text-transparent bg-clip-text">
+            搭建
+          </span>
+          和
+          <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 text-transparent bg-clip-text">
+            管理
+          </span>
+          你的系统
+        </div>
       </div>
-      <div className="flex gap-4 mt-8 flex-1">
-        {componentsColumns.map((array, index) => {
-          return (
-            <div className="flex flex-col gap-2 basis-1/4">
-              {array.map((component) => {
-                return (
-                  <div
-                    key={component.name}
-                    className="flex flex-col items-center gap-4 rounded-md p-4 border border-slate-50 shadow hover:bg-slate-50"
-                  >
-                    <div className="flex gap-2 items-center w-full text-xl tracking-wider text-gray-800 font-bold">
-                      {component.icon}
-                      {component.name}
-                    </div>
-                    <div className="w-full tracking-wider text-gray-500">
-                      {component.description}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+      <div
+        className="flex w-full gap-4 mt-8 flex-1 px-16 flex-nowrap md:flex-nowrap sm:flex-wrap"
+        ref={containerRef}
+      >
+        <Masonry columnsCount={columnCount} gutter={16}>
+          {components.map((component) => {
+            return (
+              <div
+                key={component.name}
+                className="flex flex-col items-center gap-4 rounded-md p-4 border border-slate-50 shadow hover:bg-slate-50"
+              >
+                <div className="flex gap-2 items-center w-full text-xl tracking-wider text-gray-800 font-bold">
+                  {component.icon}
+                  {component.name}
+                </div>
+                <div className="w-full tracking-wider text-gray-500">
+                  {component.description}
+                </div>
+              </div>
+            );
+          })}
+        </Masonry>
       </div>
     </div>
   );

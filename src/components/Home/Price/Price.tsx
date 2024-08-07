@@ -30,7 +30,7 @@ export default function () {
     },
   ];
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 bg-gray-50">
       <div className="w-full text-4xl font-bold text-center p-4">
         两种
         <span className="font-bold bg-gradient-to-r from-red-600 via-red-500 to-yellow-400 inline-block text-transparent bg-clip-text">
@@ -43,10 +43,10 @@ export default function () {
           点击这里查看详细的购买协议
         </a>
       </div>
-      <div className="flex gap-8 justify-center">
+      <div className="flex gap-8 justify-center p-4">
         {versions.map((version, index) => {
           return (
-            <div className="flex flex-col rounded-xl bg-zinc-50 border border-zinc-50 h-96 w-72">
+            <div className="flex flex-col rounded-xl bg-white shadow border border-zinc-50 min-h-96 w-72">
               <div className="p-4 border-slate-100 flex flex-col gap-4">
                 <div>{version.icon}</div>
                 <div className="text-slate-800 font-bold text-md">
