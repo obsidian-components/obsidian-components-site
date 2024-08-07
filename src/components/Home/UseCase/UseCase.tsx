@@ -34,8 +34,8 @@ export default function () {
   ];
 
   return (
-    <div className="flex flex-col gap-4 px-8 bg-slate-50 py-2">
-      <div className="w-full text-center  text-4xl p-4 tracking-wider text-stone-600 font-bold">
+    <div className="flex flex-col gap-4 px-8 bg-slate-50 dark:bg-transparent py-2">
+      <div className="w-full text-center text-4xl p-4 tracking-wider text-stone-600 dark:text-stone-200 font-bold">
         来了解一下。
       </div>
       <div className="w-full text-center text-xl tracking-wider text-gray-400 font-bold relative">
@@ -47,17 +47,17 @@ export default function () {
           return (
             <div
               key={item.title}
-              className={`cursor-pointer flex flex-col items-center gap-4 w-full rounded-md bg-white shadow text-stone-800 font-bold p-4 hover:bg-neutral-50`}
+              className={`cursor-pointer flex flex-col items-center gap-4 w-full rounded-md bg-white dark:bg-transparent dark:text-stone-100  dark:border dark:border-stone-400 shadow text-stone-800 font-bold p-4 hover:bg-neutral-50`}
             >
               {item.icon}
               {item.title}
-              <div className="w-full text-center text-stone-500 tracking-wider">
+              <div className="w-full text-center text-stone-400 dark:text-stone-300 tracking-wider">
                 {item.description}
               </div>
               {item.url && (
                 <div>
                   <a
-                    className="rounded-md w-full py-1 px-4 underline font-bold hover:text-stone-900  text-stone-500"
+                    className="rounded-md w-full py-1 px-4 underline font-bold hover:text-stone-900  text-stone-500 dark:text-stone-300 dark:hover:text-stone-200"
                     href={item.url}
                     target="_blank"
                   >
