@@ -44,7 +44,7 @@ export default function () {
           </a>
         </div>
       ),
-      img: "./img/user-stories/tracingOrigins.png",
+      img: "./img/user-stories/tracingorigins.png",
     },
     {
       author: "The Fool",
