@@ -59,6 +59,15 @@ export default function () {
       img: "./img/user-stories/thefool.jpg",
     },
     {
+      author: "里安",
+      description: "EVA 主题示例库",
+      img: "./img/user-stories/lian-eva.jpg",
+      readMore: {
+        url: "https://www.bilibili.com/video/BV1Ax4xeKEVf/",
+        text: "获取模板 →",
+      },
+    },
+    {
       author: "霖",
       img: "./img/user-stories/霖.jpg",
     },
@@ -71,6 +80,7 @@ export default function () {
       description: "obsidian手残玩家，人菜瘾大",
       img: "./img/user-stories/xingxing.png",
     },
+    
   ];
   return (
     <div className="flex flex-col gap-4 px-8 py-2">
